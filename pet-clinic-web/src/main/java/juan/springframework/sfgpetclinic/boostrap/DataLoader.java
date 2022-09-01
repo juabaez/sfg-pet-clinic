@@ -1,6 +1,7 @@
 package juan.springframework.sfgpetclinic.boostrap;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 import juan.springframework.sfgpetclinic.model.Owner;
 import juan.springframework.sfgpetclinic.model.Vet;
@@ -9,10 +10,16 @@ import juan.springframework.sfgpetclinic.services.VetService;
 import juan.springframework.sfgpetclinic.services.map.OwnerServiceMap;
 import juan.springframework.sfgpetclinic.services.map.VetServiceMap;
 
+@Component
 public class DataLoader implements CommandLineRunner {
 
   private final OwnerService ownerService;
   private final VetService vetService;
+
+  public DataLoader(OwnerService ownerService, VetService vetService) {
+    this.ownerService = ownerService;
+    this.vetService = vetService;
+  }
 
   public DataLoader() {
     ownerService = new OwnerServiceMap();
