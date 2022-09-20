@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import juan.springframework.sfgpetclinic.model.BaseEntity;
 
 public class AbstractMapService<T extends BaseEntity, ID extends Long> {
