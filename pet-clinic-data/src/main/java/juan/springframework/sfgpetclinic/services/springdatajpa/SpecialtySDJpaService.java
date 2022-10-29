@@ -3,14 +3,19 @@ package juan.springframework.sfgpetclinic.services.springdatajpa;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
+
 import juan.springframework.sfgpetclinic.model.Speciality;
 import juan.springframework.sfgpetclinic.repositories.SpecialityRepository;
 import juan.springframework.sfgpetclinic.services.SpecialityService;
 
-public class SpecialitySDJpaService implements SpecialityService {
+@Service
+@Profile("springdatajpa")
+public class SpecialtySDJpaService implements SpecialityService {
   private final SpecialityRepository specialityRepository;
 
-  public SpecialitySDJpaService(
+  public SpecialtySDJpaService(
       SpecialityRepository specialityRepository) {
     this.specialityRepository = specialityRepository;
   }
