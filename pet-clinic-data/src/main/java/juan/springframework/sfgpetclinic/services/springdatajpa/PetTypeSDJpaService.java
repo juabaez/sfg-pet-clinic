@@ -13,7 +13,11 @@ import juan.springframework.sfgpetclinic.services.PetTypeService;
 @Service
 @Profile("springdatajpa")
 public class PetTypeSDJpaService implements PetTypeService {
-  private PetTypeRepository petTypeRepository;
+  private final PetTypeRepository petTypeRepository;
+
+  public PetTypeSDJpaService(PetTypeRepository petTypeRepository) {
+    this.petTypeRepository = petTypeRepository;
+  }
 
   @Override
   public Set<PetType> findAll() {
