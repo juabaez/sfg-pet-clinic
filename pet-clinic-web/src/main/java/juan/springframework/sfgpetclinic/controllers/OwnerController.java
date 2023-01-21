@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import juan.springframework.sfgpetclinic.model.Owner;
 import juan.springframework.sfgpetclinic.services.OwnerService;
-import juan.springframework.sfgpetclinic.services.map.OwnerServiceMap;
 
 @RequestMapping("/owners")
 @Controller
@@ -31,13 +30,6 @@ public class OwnerController {
     dataBinder.setDisallowedFields("id");
   }
 
-//  @RequestMapping({ "", "/", "/index", "/index.html" })
-//  public String listOwners(Model model) {
-//    model.addAttribute("owners", ownerService.findAll());
-//    System.out.println("Owners size " + ownerService.findAll().size());
-//    return "owners/index";
-//  }
-
   @RequestMapping("/find")
   public String findOwners(Model model) {
     model.addAttribute("owner", Owner.builder().build());
@@ -52,7 +44,7 @@ public class OwnerController {
     }
 
     // find owners by last name
-    List<Owner> ownersResults = ownerService.findAllByLastNameLike(owner.getLastName());
+    List<Owner> ownersResults = ownerService.findAllByLastNameLike("%" + owner.getLastName() + "%");
     if (ownersResults.isEmpty()) {
       // no owners found
       result.rejectValue("lastName", "notFound", "not found");
@@ -67,7 +59,7 @@ public class OwnerController {
 
     // multiple owners found
     model.addAttribute("selections", ownersResults);
-    return "owners/findOwners";
+    return "owners/ownersList";
   }
 
   @GetMapping("/{ownerId}")
