@@ -1,5 +1,7 @@
 package juan.springframework.sfgpetclinic.controllers;
 
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -36,6 +38,13 @@ public class VisitController {
   @InitBinder
   public void setAllowedFields(WebDataBinder dataBinder) {
     dataBinder.setDisallowedFields("id");
+
+    dataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+      @Override
+      public void setAsText(String text) {
+        setValue(LocalDate.parse(text));
+      }
+    });
   }
 
   /**
@@ -71,7 +80,7 @@ public class VisitController {
   @PostMapping("/owners/{ownerId}/pets/{petId}/visits/new")
   public String processNewVisitForm(@Valid Visit visit, BindingResult result) {
     if (result.hasErrors()) {
-      return "pets/createOrUpdateVisitForm";
+      return "pets/createOrUpdateVisxºitForm";
     } else {
       visitService.save(visit);
       return "redirect:/owners/{ownerId}";
